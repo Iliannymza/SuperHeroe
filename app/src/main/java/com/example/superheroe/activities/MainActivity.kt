@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 superheroeList = response.results
 
                 //volvemos al hilo principal
-                CoroutineScope(Dispatchers.IO).launch {
+                CoroutineScope(Dispatchers.Main).launch {
                     adapter.updateItems(superheroeList)
                 }
             } catch (e: Exception) {
