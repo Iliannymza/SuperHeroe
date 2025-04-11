@@ -64,8 +64,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-
-                return false
+                if (newText.isEmpty()) {
+                    searchSuperheroes("a") //con la "a" buscabamos para ver algo sin tener que escribir nada
+                }
+                return true
             }
         })
 
