@@ -1,5 +1,6 @@
 package com.example.superheroe.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.enableEdgeToEdge
@@ -10,9 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.superheroe.R
-import com.example.superheroe.adaoters.SuperHeroeAdapter
+import com.example.superheroe.adapters.SuperHeroeAdapter
 import com.example.superheroe.data.Superheroe
 import com.example.superheroe.utils.SuperHeroeService
 import kotlinx.coroutines.CoroutineScope
@@ -38,13 +38,19 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView =  findViewById(R.id.recyclerView)
 
-        adapter = SuperHeroeAdapter(superheroeList)
+        adapter = SuperHeroeAdapter(superheroeList) { position: Int ->
+            val superheroe = superheroeList[position]
+
+            val  intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.SUPERHEROE_ID, superheroe.id)
+            startActivity(intent)
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         searchSuperheroes("a")
     }
-
+    // creacion del menu o la busqueda, despues del creara el icono
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activities_main_menu, menu)
 
