@@ -1,25 +1,22 @@
 package com.example.superheroe.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.superheroe.R
 import com.example.superheroe.data.Superheroe
 import com.example.superheroe.databinding.ItemSuperheroeBinding
 import com.squareup.picasso.Picasso
 
 class SuperHeroeAdapter(
     var items: List<Superheroe>,
-    //cacturamos el click en el adapter y para ello vamos a crear una funcion
+    //capturamos el click en el adapter y para ello vamos a crear una funcion
     val onItemClick: (position: Int) -> Unit
 ): Adapter<SuperheroeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperheroeViewHolder {
-        //val view = LayoutInflater.from(parent.context).inflate(R.layout.item_superheroe, parent, false)
+        // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_superheroe, parent, false)
+
         val binding = ItemSuperheroeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SuperheroeViewHolder(binding)
     }
