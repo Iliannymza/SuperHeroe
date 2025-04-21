@@ -1,6 +1,7 @@
 package com.example.superheroe.activities
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -41,6 +42,20 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.getStringExtra(SUPERHEROE_ID)!!
         getSuperheroeById(id)
+
+        binding.navigationView.setOnItemSelectedListener { menuItem ->
+            binding.contentBiography.visibility = View.GONE
+            binding.contentAppearance.visibility = View.GONE
+            binding.contentStats.visibility = View.GONE
+
+            when (menuItem.itemId) {
+                R.id.menu_biography -> binding.contentBiography.visibility = View.VISIBLE
+                R.id.menu_appearance -> binding.contentAppearance.visibility = View.VISIBLE
+                R.id.menu_stats -> binding.contentStats.visibility = View.VISIBLE
+            }
+            true
+        }
+        binding.navigationView.selectedItemId = R.id.menu_biography
     }
 
     fun getSuperheroeById(id: String) {
