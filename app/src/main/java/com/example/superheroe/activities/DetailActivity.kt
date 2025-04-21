@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.superheroe.R
 import com.example.superheroe.data.Superheroe
+import com.example.superheroe.databinding.ActivityDetailBinding
 import com.example.superheroe.utils.SuperHeroeService
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -21,15 +22,17 @@ class DetailActivity : AppCompatActivity() {
         const val SUPERHEROE_ID = "SUPERHEROE_ID"
     }
 
-    lateinit var nameTextView: TextView
-    lateinit var avatarImageView: ImageView
+    lateinit var binding: ActivityDetailBinding
 
     lateinit var superheroe: Superheroe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_detail)
+
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -37,10 +40,6 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val id = intent.getStringExtra(SUPERHEROE_ID)!!
-
-        avatarImageView = findViewById(R.id.avatarImageView)
-        nameTextView = findViewById(R.id.nameTextView)
-
         getSuperheroeById(id)
     }
 
@@ -62,7 +61,12 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        nameTextView.text = superheroe.name
-        Picasso.get().load(superheroe.image.url).into(avatarImageView)
+        supportActionBar?.title = superheroe.name
+        supportActionBar?.subtitle = superheroe.biography.realNAme
+        Picasso.get().load(superheroe.image.url).into(binding.avatarImageView)
+
+        binding.publisherTextView.text = superheroe.biography.publisher
+        binding.placeOfBirthTextView.text = superheroe.biography.placeOfBirth
+        binding.alignmentTextView.text = superheroe.biography.alignment
     }
 }

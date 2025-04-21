@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroe.R
 import com.example.superheroe.adapters.SuperHeroeAdapter
 import com.example.superheroe.data.Superheroe
+import com.example.superheroe.databinding.ActivityMainBinding
 import com.example.superheroe.utils.SuperHeroeService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +22,8 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
+    lateinit var binding: ActivityMainBinding
+
     lateinit var adapter: SuperHeroeAdapter
 
     var superheroeList: List<Superheroe> = emptyList()
@@ -29,14 +31,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        recyclerView =  findViewById(R.id.recyclerView)
 
         adapter = SuperHeroeAdapter(superheroeList) { position: Int ->
             val superheroe = superheroeList[position]
@@ -45,8 +49,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(DetailActivity.SUPERHEROE_ID, superheroe.id)
             startActivity(intent)
         }
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         searchSuperheroes("a")
     }
