@@ -2,8 +2,6 @@ package com.example.superheroe.activities
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -41,6 +39,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val id = intent.getStringExtra(SUPERHEROE_ID)!!
+
         getSuperheroeById(id)
 
         binding.navigationView.setOnItemSelectedListener { menuItem ->
@@ -55,6 +54,7 @@ class DetailActivity : AppCompatActivity() {
             }
             true
         }
+
         binding.navigationView.selectedItemId = R.id.menu_biography
     }
 
@@ -76,12 +76,16 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        supportActionBar?.title = superheroe.name
-        supportActionBar?.subtitle = superheroe.biography.realNAme
+       supportActionBar?.title = superheroe.name
+       supportActionBar?.subtitle = superheroe.biography.realName
         Picasso.get().load(superheroe.image.url).into(binding.avatarImageView)
 
         binding.publisherTextView.text = superheroe.biography.publisher
         binding.placeOfBirthTextView.text = superheroe.biography.placeOfBirth
         binding.alignmentTextView.text = superheroe.biography.alignment
+
+        // Stats
+        binding.intelligenceTextView.text = "${superheroe.stats.intelligence.toIntOrNull() ?: 0}"
+        binding.intelligenceProgress.progress = superheroe.stats.intelligence.toIntOrNull() ?: 0
     }
 }
