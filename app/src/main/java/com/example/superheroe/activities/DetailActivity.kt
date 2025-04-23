@@ -98,8 +98,8 @@ class DetailActivity : AppCompatActivity() {
         binding.contentBiography.placeOfBirthTextView.text = superheroe.biography.placeOfBirth
         binding.contentBiography.alignmentTextView.text = superheroe.biography.alignment
         binding.contentBiography.alignmentTextView.setTextColor(getColor(superheroe.getAlignmentColor()))
-        binding.contentBiography.alignmentTextView.text = superheroe.work.occupation
-        binding.contentBiography.alignmentTextView.text = superheroe.work.base
+        binding.contentBiography.occupationTextView.text = superheroe.work.occupation
+        binding.contentBiography.baseTextView.text = superheroe.work.base
 
         // Appearance
 
