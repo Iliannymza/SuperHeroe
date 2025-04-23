@@ -10,7 +10,7 @@
 
     <item android:id="@+id/menu_appearance"
         android:title="Appearace"
-        android:icon="@drawable/ic_appearence"
+        android:icon="@drawable/ic_appearance"
         app:showAsAction="always"/>
 
     <item android:id="@+id/menu_stats"

@@ -16,7 +16,6 @@ class SuperHeroeAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperheroeViewHolder {
         // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_superheroe, parent, false)
-
         val binding = ItemSuperheroeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SuperheroeViewHolder(binding)
     }

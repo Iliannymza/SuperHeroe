@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -60,7 +59,6 @@ class MainActivity : AppCompatActivity() {
 
         val menuItem = menu.findItem(R.id.menu_search)
         val searchView = menuItem.actionView as SearchView
-
         searchView.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 searchSuperheroes(query)
@@ -69,9 +67,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.isEmpty()) {
-                    searchSuperheroes("a") //con la "a" buscabamos para ver algo sin tener que escribir nada
+                    searchSuperheroes("a") //! -- con la "a" buscabamos para ver algo sin tener que escribir nada -- !//
                 }
-                return true
+                return false
             }
         })
 
